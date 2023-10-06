@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace IctSolutions\CodeIgniterBreadcrumbs;
 
 use CodeIgniter\HTTP\URI;
+use IctSolutions\CodeIgniterBreadcrumbs\Config\Breadcrumb as BreadcrumbConfig;
+use RuntimeException;
 
 class Breadcrumb
 {
+    protected BreadcrumbConfig $config;
+
     /**
      * An empty array to hold breadcrumb links for this instance of the Breadcrumbs class.
      */
@@ -20,7 +24,10 @@ class Breadcrumb
      */
     public function __construct()
     {
+        $this->config = config('Breadcrumb');
+
         $uri = ''; // Initialize an empty string to build up the URI by appending each segment
+
         /** @var URI $url */
         $url = current_url(true);
 
@@ -31,7 +38,7 @@ class Breadcrumb
 
             // Generate a link for this segment and add it to the list of breadcrumbs
             $this->links[] = [
-                'text'   => is_numeric($segment) ? $segment : lang('Breadcrumb.' . $segment), // Use either the segment value or a localized version of it as the text for the link
+                'text'   => is_numeric($segment) ? $segment : ($this->config->isTranslatable ? lang('Breadcrumb.' . $segment) : $segment), // Use either the segment value or a localized version of it as the text for the link if enabled
                 'href'   => base_url($uri), // Generate the link's href using the URI built up so far
                 'active' => false, // Assume the link is not active by default
             ];
@@ -75,8 +82,11 @@ class Breadcrumb
             $listItems .= $this->createListItem($link);
         }
 
-        // Return an ordered list HTML element with the appropriate class and containing the list items
-        return '<ol class="breadcrumb' . ($class !== '' ? ' ' . $class : '') . '">' . $listItems . '</ol>';
+        return match ($this->config->style) {
+            'tabler'     => '<ol class="breadcrumb' . ($class !== '' ? ' ' . $class : '') . '" aria-label="breadcrumbs">' . $listItems . '</ol>',
+            'bootstrap5' => '<nav aria-label="breadcrumb"><ol class="breadcrumb' . ($class !== '' ? ' ' . $class : '') . '">' . $listItems . '</ol></nav>',
+            default      => throw new RuntimeException("Breadcrumb: Invalid style {$this->config->style} specified."),
+        };
     }
 
     /**

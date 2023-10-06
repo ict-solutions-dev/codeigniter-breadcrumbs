@@ -12,6 +12,22 @@ Installation is done through Composer.
 ```console
 composer require ictsolutions/codeigniter-breadcrumbs
 ```
+## Configuration
+
+The library's default behavior can be overridden or augmented by its config file. Copy `examples/Breadcrumb.php` to `app/Config/Breadcrumb.php` and follow the instructions in the comments. If no config file is found the library will use its default. In the Breadcrumb class, you can set the following configuration options:
+
+`$isTranslatable`
+
+- Description: Specifies whether the breadcrumbs will be translatable or not. If set to `true` then inside the Language folder, create a new file named `Breadcrumb.php`. This will be the language file for your breadcrumbs.
+- Type: bool
+- Default: false
+
+`$style`
+
+- Description: Sets the desired style for the breadcrumb navigation.
+- Type: string
+- Allowed Values: 'tabler', 'bootstrap5'
+- Default: 'tabler'
 
 ## Helpers
 

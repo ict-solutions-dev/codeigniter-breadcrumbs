@@ -4,8 +4,8 @@ if (! function_exists('render_breadcrumb')) {
     /**
      * Renders the breadcrumb navigation through the Breadcrumb service
      *
-     * @param string $class     The CSS class to use for the breadcrumb container element (default: 'breadcrumb-arrows')
-     * @param string $listItems The HTML markup for the breadcrumb list items
+     * @param string $class     The CSS class to use for the breadcrumb container element (default: '')
+     * @param string $listItems The HTML markup for the breadcrumb list items (default: '')
      *
      * @return string The HTML markup for the breadcrumb navigation
      */
