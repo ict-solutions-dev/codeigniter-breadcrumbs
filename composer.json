@@ -1,0 +1,64 @@
+{
+    "name": "ictsolutions/codeigniter-breadcrumbs",
+    "description": "Breadcrumbs for CodeIgniter 4 framework.",
+    "license": "MIT",
+    "type": "library",
+    "keywords": ["codeigniter", "codeigniter4", "breadcrumbs"],
+    "authors": [
+        {
+            "name": "jozefrebjak",
+            "homepage": "https://github.com/jozefrebjak",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/ict-solutions-dev/codeigniter-breadcrumbs",
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "codeigniter4/devkit": "^1.0",
+        "codeigniter4/framework": "^4.1",
+        "rector/rector": "0.18.4",
+        "qossmic/deptrac-shim": "^1.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "IctSolutions\\CodeIgniterBreadcrumbs\\": "src"
+        },
+        "files": ["src/Common.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests",
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    },
+    "scripts": {
+        "analyze": [
+            "phpstan analyze",
+            "psalm",
+            "rector process --dry-run"
+        ],
+        "sa": "@analyze",
+        "ci": [
+            "Composer\\Config::disableProcessTimeout",
+            "@cs",
+            "@inspect",
+            "@analyze",
+            "@test"
+        ],
+        "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix --ansi --verbose --diff",
+        "style": "@cs-fix",
+        "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
+        "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
+        "test": "phpunit"
+    }
+}
