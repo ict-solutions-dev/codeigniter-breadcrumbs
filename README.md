@@ -18,16 +18,19 @@ The library's default behavior can be overridden or augmented by its config file
 
 `$isTranslatable`
 
-- Description: Specifies whether the breadcrumbs will be translatable or not. If set to `true` then inside the Language folder, create a new file named `Breadcrumb.php`. This will be the language file for your breadcrumbs.
-- Type: bool
-- Default: false
+Specifies whether the breadcrumbs will be translatable or not. If set to `true` then inside the Language folder, create a new file named `Breadcrumb.php`. This will be the language file for your breadcrumbs.
+
+- Type: `bool`
+- Allowed Values: `false`, `true`
+- Default: `true`
 
 `$style`
 
-- Description: Sets the desired style for the breadcrumb navigation.
-- Type: string
-- Allowed Values: 'tabler', 'bootstrap5'
-- Default: 'tabler'
+Sets the desired style for the breadcrumb navigation.
+
+- Type: `string`
+- Allowed Values: `tabler`, `bootstrap5`
+- Default: `tabler`
 
 ## Helpers
 
@@ -71,7 +74,7 @@ To create a CodeIgniter project with breadcrumbs, follow these steps:
 1. Initialize a new CodeIgniter project by running the following command in your terminal or shell:
 
 ```sh
-composer create-project codeigniter4/appstarter ci4-breadcrumbs
+composer create-project codeigniter4/appstarter ci4-breadcrumbs && cd ci4-breadcrumbs
 ```
 
 This will create a new CodeIgniter project named "ci4-breadcrumbs" using the CodeIgniter 4 starter template.
@@ -81,6 +84,7 @@ This will create a new CodeIgniter project named "ci4-breadcrumbs" using the Cod
 ```sh
 composer require ictsolutions/codeigniter-breadcrumbs
 ```
+
 This will install the "ictsolutions/codeigniter-breadcrumbs" library into your project.
 
 3. In the `Home` controller of your CodeIgniter project, add two new methods: `foo()` and `bar()`. You can add these methods to the existing `Home` controller file (`app/Controllers/Home.php`). Here is an example of how to add the methods:
@@ -109,6 +113,21 @@ class Home extends BaseController
 }
 ```
 
+Copy new methods directly:
+
+```php
+   public function foo(): string
+   {
+       return view('foo-bar');
+   }
+
+   public function bar(): string
+   {
+       return view('foo-bar');
+   }
+```
+
+
 4. In the `Routes` configuration file (`app/Config/Routes.php`), add two new routes for the `foo()` and `bar()` methods. Here is an example of how to add the routes:
 
 ```diff
@@ -122,6 +141,13 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 +$routes->get('foo', 'Home::foo');
 +$routes->get('foo/bar', 'Home::bar');
+```
+
+Copy new routes directly:
+
+```php
+$routes->get('foo', 'Home::foo');
+$routes->get('foo/bar', 'Home::bar');
 ```
 
 5. In the `Views` folder of your CodeIgniter project, create a new view file named `foo-bar.php` and add the following content to it:
@@ -159,7 +185,13 @@ return [
 
 This is an example of the English translation for the breadcrumbs. You can create additional files for different languages or modify the existing file to add translations in different languages.
 
-7. Finally, you can visit `http://localhost:8080/foo/bar` in your web browser to see the result. This URL will trigger the `bar()` method in the `Home` controller and display the `foo-bar.php` view with the Bootstrap styling and the breadcrumb content.
+7. Finally, run:
+
+```console
+php spark serve
+```
+
+Now you can visit `http://localhost:8080/foo/bar` in your web browser to see the result. This URL will trigger the `bar()` method in the `Home` controller and display the `foo-bar.php` view with the Bootstrap styling and the breadcrumb content.
 
 ## License
 

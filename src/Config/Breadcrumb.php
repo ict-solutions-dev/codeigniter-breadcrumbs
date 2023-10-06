@@ -11,9 +11,9 @@ class Breadcrumb extends BaseConfig
     /**
      * Indicates whether the breadcrumbs will be translatable or not.
      *
-     * @var bool Specifies if the breadcrumbs are translatable. Default is false.
+     * @var bool Specifies if the breadcrumbs are translatable. Default is true.
      */
-    public bool $isTranslatable = false;
+    public bool $isTranslatable = true;
 
     /**
      * Set the desired style for the navigation. Default value is 'tabler'.
