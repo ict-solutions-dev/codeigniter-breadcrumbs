@@ -77,7 +77,7 @@ class Breadcrumb
      */
     public function render(string $class = '', string $listItems = ''): string
     {
-        if (setting('Breadcrumb.includeHome')) {
+        if ($this->config->includeHome) {
             $homeLink['text']   = lang('Menu.home');
             $homeLink['href']   = base_url();
             $homeLink['active'] = current_url() === base_url();
