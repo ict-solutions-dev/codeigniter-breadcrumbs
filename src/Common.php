@@ -9,11 +9,11 @@ if (! function_exists('render_breadcrumb')) {
      *
      * @return string The HTML markup for the breadcrumb navigation
      */
-    function render_breadcrumb(string $class = '', string $listItems = '', bool $includeHome = false): string
+    function render_breadcrumb(string $class = '', string $listItems = ''): string
     {
         $breadcrumbService = service('breadcrumb');
 
-        return $breadcrumbService ? $breadcrumbService->render($class, $listItems, $includeHome) : '';
+        return $breadcrumbService ? $breadcrumbService->render($class, $listItems) : '';
     }
 }
 

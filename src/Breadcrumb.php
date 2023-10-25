@@ -75,9 +75,9 @@ class Breadcrumb
      *
      * @return string HTML representation of breadcrumb navigation.
      */
-    public function render(string $class = '', string $listItems = '', bool $includeHome = false): string
+    public function render(string $class = '', string $listItems = ''): string
     {
-        if ($includeHome) {
+        if (setting('Breadcrumb.includeHome')) {
             $homeLink['text']   = lang('Menu.home');
             $homeLink['href']   = base_url();
             $homeLink['active'] = current_url() === base_url();

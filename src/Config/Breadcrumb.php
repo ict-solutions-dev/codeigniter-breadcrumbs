@@ -16,6 +16,13 @@ class Breadcrumb extends BaseConfig
     public bool $isTranslatable = true;
 
     /**
+     * A boolean variable that determines whether the home page is included in the breadcrumbs.
+     *
+     * @var bool Specifies if the home page is included in the breadcrumbs. The default value is true.
+     */
+    public bool $includeHome = true;
+
+    /**
      * Set the desired style for the navigation. Default value is 'tabler'.
      * Allowed values: 'tabler', 'bootstrap5'.
      *
