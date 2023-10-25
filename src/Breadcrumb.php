@@ -75,8 +75,15 @@ class Breadcrumb
      *
      * @return string HTML representation of breadcrumb navigation.
      */
-    public function render(string $class = '', string $listItems = ''): string
+    public function render(string $class = '', string $listItems = '', bool $includeHome = false): string
     {
+        if ($includeHome){
+            $homeLink['text'] = lang('Menu.home');
+            $homeLink['href'] = base_url();
+            $homeLink['active'] = current_url() === base_url() ? true : false;
+            $listItems .= $this->createListItem($homeLink);
+        }
+
         // Loop through each link in the array of links and create a list item for it
         foreach ($this->links as $link) {
             $listItems .= $this->createListItem($link);
