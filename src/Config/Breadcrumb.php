@@ -20,7 +20,7 @@ class Breadcrumb extends BaseConfig
      *
      * @var bool Specifies if the home page is included in the breadcrumbs. The default value is true.
      */
-    public bool $includeHome = true;
+    public bool $includeHome = false;
 
     /**
      * Set the desired style for the navigation. Default value is 'tabler'.
