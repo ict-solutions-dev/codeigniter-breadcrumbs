@@ -79,6 +79,13 @@ class Breadcrumb
      */
     public function render(string $class = '', string $listItems = ''): string
     {
+        if ($this->config->includeHome) {
+            $homeLink['text']   = lang('Menu.home');
+            $homeLink['href']   = base_url();
+            $homeLink['active'] = current_url() === base_url();
+            $listItems .= $this->createListItem($homeLink);
+        }
+
         // Loop through each link in the array of links and create a list item for it
         foreach ($this->links as $link) {
             $listItems .= $this->createListItem($link);

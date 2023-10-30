@@ -20,6 +20,10 @@ The library's default behavior can be overridden or augmented by its config file
 
 Specifies whether the breadcrumbs will be translatable or not. If set to `true` then inside the Language folder, create a new file named `Breadcrumb.php`. This will be the language file for your breadcrumbs.
 
+`$includeHome`
+
+Determines whether the home page should be included in the breadcrumb trail. Setting it to `true` includes the home page in the breadcrumbs, enhancing navigation, while setting it to `false` excludes it from the breadcrumb trail.
+
 - Type: `bool`
 - Allowed Values: `false`, `true`
 - Default: `true`
