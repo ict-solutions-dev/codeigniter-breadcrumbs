@@ -45,6 +45,8 @@ This repository contains two helper functions that allow you to use the `Breadcr
 
 This function renders the breadcrumb navigation through the `Breadcrumb` service.
 
+Note: If the route contains "log-", the "log-" segment will be automatically ignored in the breadcrumb, ensuring a cleaner and more user-friendly navigation experience.
+
 To use this function, simply call `render_breadcrumb()` from your **view** where you want the breadcrumb navigation to appear. You can optionally pass a CSS class name to style the container element for the breadcrumb navigation. For example:
 
 ```php

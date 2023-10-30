@@ -38,7 +38,9 @@ class Breadcrumb
 
             // Generate a link for this segment and add it to the list of breadcrumbs
             $this->links[] = [
-                'text'   => is_numeric($segment) ? $segment : ($this->config->isTranslatable ? lang('Breadcrumb.' . $segment) : $segment), // Use either the segment value or a localized version of it as the text for the link if enabled
+                'text' => is_numeric($segment)
+                    ? $segment
+                    : (str_contains((string) $segment, 'log-') ? $segment : lang('Breadcrumb.' . $segment)), // Use either the segment value or a localized version of it as the text for the link if enabled
                 'href'   => base_url($uri), // Generate the link's href using the URI built up so far
                 'active' => false, // Assume the link is not active by default
             ];
