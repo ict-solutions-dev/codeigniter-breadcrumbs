@@ -29,4 +29,18 @@ class Breadcrumb extends BaseConfig
      * @var string The style to be used for rendering the navigation.
      */
     public string $style = 'tabler';
+
+    /**
+     * A boolean variable that determines whether the special words in the breadcrumbs are replacable or not.
+     *
+     * @var bool Specifies if the special words in the breadcrumbs are replacable. The default value is true.
+     */
+    public bool $isSpecialWordsReplacable = true;
+
+    /**
+     * An array of special words that are replacable in the breadcrumbs.
+     *
+     * @var array The special words that are replacable in the breadcrumbs.
+     */
+    public array $specialWords = ['new', 'edit', 'delete'];
 }

@@ -53,18 +53,48 @@ class Breadcrumb
     }
 
     /**
-     * Replaces any numeric text parameters in the links with values from an array of new parameters.
+     * The replaceParams method replaces numeric or special word text parameters in the links
+     * with new values contained within an array of new parameters. It first checks if the
+     * new parameters are available and if the special words can be replaced.
+     *
+     * If allowed, it assigns special words by prefixing 'Breadcrumb.' to each word in the array.
+     * In case any link text is numeric or a special word, the original value is replaced by a
+     * new parameter from the newParams array. This process continues until there are no more
+     * new parameters left.
      *
      * @param array $newParams An array of new parameter values to replace the existing ones with
      */
     public function replaceParams(array $newParams): void
     {
+        // Guard clause when no new parameters available
+        if (count($newParams) === 0) {
+            return;
+        }
+
+        $isReplaceable = $this->config->isSpecialWordsReplacable;
+
+        // Assign special words if replacement is allowed
+        $specialWordsFlipped = [];
+
+        if ($isReplaceable) {
+            $specialWords = $this->config->specialWords;
+
+            // Add prefix 'Breadcrumb.' to each word in the array of special words
+            $specialWords = array_map(static fn ($word) => 'Breadcrumb.' . $word, $specialWords);
+
+            $specialWordsFlipped = array_flip($specialWords);
+        }
+
         // Loop through each link in the $this->links array by reference to modify the original array
         foreach ($this->links as &$link) {
-            // Check if this link's text is numeric and there are still new parameters to replace it with
-            if (is_numeric($link['text']) && ! empty($newParams)) {
-                // Replace the numeric text with the next value from the $newParams array
+            // Replace when link text is numeric or in special words
+            if (is_numeric($link['text']) || isset($specialWordsFlipped[$link['text']])) {
                 $link['text'] = array_shift($newParams);
+
+                // Guard clause when no new parameters available
+                if (count($newParams) === 0) {
+                    break;
+                }
             }
         }
     }
