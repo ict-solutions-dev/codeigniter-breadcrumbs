@@ -41,7 +41,7 @@ Sets the desired style for the breadcrumb navigation.
 This repository contains two helper functions that allow you to use the `Breadcrumb` class more easily in your CodeIgniter project:
 
 - `render_breadcrumb()`: Renders the breadcrumb navigation through the `Breadcrumb` service.
-- `replace_breadcrumb_params()`: Replaces all numeric text in breadcrumb links with new parameters through the `Breadcrumb` service.
+- `replace_breadcrumb_params()`: Replace all numeric text in breadcrumb links, along with a set of configured special words including `create`, `edit`, and `delete`, with new parameters through the `Breadcrumb` service.
 
 ## Usage
 
@@ -49,7 +49,7 @@ This repository contains two helper functions that allow you to use the `Breadcr
 
 This function renders the breadcrumb navigation through the `Breadcrumb` service.
 
-Note: If the route contains "log-", the "log-" segment will be automatically ignored in the breadcrumb, ensuring a cleaner and more user-friendly navigation experience.
+Note: If the route contains `log-`, the `log-` segment will be automatically ignored in the breadcrumb, ensuring a cleaner and more user-friendly navigation experience.
 
 To use this function, simply call `render_breadcrumb()` from your **view** where you want the breadcrumb navigation to appear. You can optionally pass a CSS class name to style the container element for the breadcrumb navigation. For example:
 
@@ -59,7 +59,9 @@ To use this function, simply call `render_breadcrumb()` from your **view** where
 
 #### `replace_breadcrumb_params()`
 
-This function replaces all numeric text in breadcrumb links with new parameters through the `Breadcrumb` service.
+This function replaces all numeric text in breadcrumb links, along with a set of configured special words including `create`, `edit`, and `delete`, with new parameters through the `Breadcrumb` service.This is particularly useful in improving the user experience as it provides more meaningful and intuitive breadcrumb navigation.
+
+Users typically interface with breadcrumbs that reflect the structure of the website or application. By replacing generic numeric values or specific technical terms (`create`, `edit`, `delete`) with more context-specific text, you can make the navigation more intuitive and user-friendly. It allows users to understand their current position and navigate back to previous pages easily.
 
 
 To use this function, simply call `replace_breadcrumb_params()` from your controller, passing in an array of new parameters. For example:
@@ -69,7 +71,7 @@ $newParams = ['Home', 'New Category', 'Product Name'];
 replace_breadcrumb_params($newParams);
 ```
 
-This will replace any numeric text parameters in the breadcrumb links with the corresponding values from `$newParams`.
+This will replace any numeric text or specially configured words such as `create`, `edit` and `delete` in the breadcrumb links with the corresponding values from `$newParams`.
 
 Note that you must have already created an instance of the `Breadcrumb` class and set it up with the appropriate links before calling this function.
 
