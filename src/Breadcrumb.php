@@ -67,7 +67,7 @@ class Breadcrumb
     public function replaceParams(array $newParams): void
     {
         // Guard clause when no new parameters available
-        if (count($newParams) === 0) {
+        if ($newParams === []) {
             return;
         }
 
@@ -92,7 +92,7 @@ class Breadcrumb
                 $link['text'] = array_shift($newParams);
 
                 // Guard clause when no new parameters available
-                if (count($newParams) === 0) {
+                if ($newParams === []) {
                     break;
                 }
             }
