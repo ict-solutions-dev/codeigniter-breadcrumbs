@@ -3,7 +3,11 @@
     "description": "Breadcrumbs for CodeIgniter 4 framework.",
     "license": "MIT",
     "type": "library",
-    "keywords": ["codeigniter", "codeigniter4", "breadcrumbs"],
+    "keywords": [
+        "codeigniter",
+        "codeigniter4",
+        "breadcrumbs"
+    ],
     "authors": [
         {
             "name": "jozefrebjak",
@@ -16,10 +20,10 @@
         "php": "^8.1"
     },
     "require-dev": {
-        "codeigniter4/devkit": "^1.0",
-        "codeigniter4/framework": "^4.1",
-        "rector/rector": "0.18.13",
-        "qossmic/deptrac-shim": "^1.0"
+        "codeigniter4/devkit": "^1.1.2",
+        "codeigniter4/framework": "^4.4.6",
+        "ergebnis/composer-normalize": "^2.42",
+        "qossmic/deptrac-shim": "^1.0.2"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -27,7 +31,9 @@
         "psr-4": {
             "IctSolutions\\CodeIgniterBreadcrumbs\\": "src"
         },
-        "files": ["src/Common.php"]
+        "files": [
+            "src/Common.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -37,28 +43,34 @@
     },
     "config": {
         "allow-plugins": {
+            "ergebnis/composer-normalize": true,
             "phpstan/extension-installer": true
         }
     },
     "scripts": {
         "analyze": [
+            "Composer\\Config::disableProcessTimeout",
             "phpstan analyze",
             "psalm",
-            "rector process --dry-run"
+            "@rector"
         ],
-        "sa": "@analyze",
         "ci": [
             "Composer\\Config::disableProcessTimeout",
-            "@cs",
+            "@composer normalize --dry-run",
+            "@test",
+            "@style",
             "@inspect",
-            "@analyze",
-            "@test"
+            "@analyze"
         ],
         "cs": "php-cs-fixer fix --ansi --verbose --dry-run --diff",
         "cs-fix": "php-cs-fixer fix --ansi --verbose --diff",
-        "style": "@cs-fix",
         "inspect": "deptrac analyze --cache-file=build/deptrac.cache",
         "mutate": "infection --threads=2 --skip-initial-tests --coverage=build/phpunit",
-        "test": "phpunit"
+        "rector": "rector process --dry-run",
+        "rector-fix": "rector process",
+        "sa": "@analyze",
+        "style": "@cs-fix",
+        "test": "phpunit",
+        "testdox": "phpunit --testdox"
     }
 }
