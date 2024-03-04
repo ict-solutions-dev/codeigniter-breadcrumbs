@@ -42,5 +42,5 @@ class Breadcrumb extends BaseConfig
      *
      * @var array The special words that are replacable in the breadcrumbs.
      */
-    public array $specialWords = ['new', 'edit', 'delete'];
+    public array $specialWords = ['create', 'edit', 'delete'];
 }
