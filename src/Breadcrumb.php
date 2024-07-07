@@ -96,13 +96,6 @@ class Breadcrumb
                     break;
                 }
             }
-                $link['text'] = array_shift($newParams);
-
-                // Guard clause when no new parameters available
-                if ($newParams === []) {
-                    break;
-                }
-            }
         }
     }
 
