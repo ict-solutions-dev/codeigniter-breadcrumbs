@@ -87,8 +87,8 @@ class Breadcrumb
 
         // Loop through each link in the $this->links array by reference to modify the original array
         foreach ($this->links as &$link) {
-            // Replace when link text is numeric or in special words
-            if (is_numeric($link['text']) || isset($specialWordsFlipped[$link['text']])) {
+            // Replace when link text is numeric, in special words, or matches the 'Breadcrumb.' slug pattern
+            if (is_numeric($link['text']) || isset($specialWordsFlipped[$link['text']]) || preg_match('/^Breadcrumb\.[a-z0-9]+(?:-[a-z0-9]+)*$/', $link['text'])) {
                 $link['text'] = array_shift($newParams);
 
                 // Guard clause when no new parameters available
